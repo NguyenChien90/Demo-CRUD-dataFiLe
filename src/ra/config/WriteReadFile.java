@@ -10,26 +10,24 @@ public class WriteReadFile<T> {
 
     public void writeFile(String PATH_FILE, List<T> list) {
         File file = new File(PATH_FILE);
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
         try {
-            fos = new FileOutputStream(file);
-            oos = new ObjectOutputStream(fos);
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(list);
             fos.close();
             oos.close();
-        } catch (Exception e) {
-            System.out.println("Write Error!!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Find not found!!!");
+        } catch (IOException e) {
+            System.out.println("Write file Error!!!");
         }
     }
     public List<T> readFile(String PATH_FILE){
         File file = new File(PATH_FILE);
-        FileInputStream fis = null;
-        ObjectInputStream ois = null;
         List<T> list = null;
         try {
-            fis = new FileInputStream(file);
-            ois = new ObjectInputStream(fis);
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
             list = (List<T>) ois.readObject();
             if (fis != null){
                 fis.close();
@@ -38,14 +36,10 @@ public class WriteReadFile<T> {
                 ois.close();
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Không tìm thấy file!!!");
-        } catch (IOException e) {
-            System.out.println("File rông!!!");
-        } catch (ClassNotFoundException e) {
-           e.printStackTrace();
+            System.out.println("Find not found!!!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Read file Error!!!");
         }
         return list;
-
     }
-
 }

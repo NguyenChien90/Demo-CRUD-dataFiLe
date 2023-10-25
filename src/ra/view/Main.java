@@ -4,9 +4,7 @@ import ra.config.Config;
 
 public class Main {
     public static void main(String[] args) {
-//        Main main = new Main();
-//        main.menu();
-         new Main().menu();// tương đương 2 dòng trên tạo đối tượng lớp Main để gọi đến phương thức
+         new Main().menu();// tạo đối tượng lớp Main để gọi đến phương thức
     }
     public void menu() {
             int choice;
